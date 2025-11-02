@@ -16,14 +16,11 @@ function Navbar() {
                 alt="nome"
               />
             </Link>
-            <Link to="/postagens" className="hover:underline">
-              Postagens
+            <Link to="/agenda" className="hover:underline">
+              Agenda
             </Link>
-            <Link to="/temas " className="hover:underline">
-              Temas
-            </Link>
-            <Link to="/cadastrartema " className="hover:underline">
-              Cadastrar Tema
+            <Link to="/remedios " className="hover:underline">
+              Remedios
             </Link>
             <Link to="/" className="hover:underline">
               Sair
