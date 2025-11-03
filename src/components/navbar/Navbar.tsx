@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContex } from "../../contexts/AuthContext";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const { usuario, handleLogout } = useContext(AuthContex);
+
+  function logout() {
+    handleLogout();
+    alert("O Usuário foi desconectado com sucesso!");
+    navigate("/");
+  }
+
   return (
     <>
       <div className="w-full flex justify-center py-4 bg-blue-600 text-white">
@@ -22,7 +34,7 @@ function Navbar() {
             <Link to="/remedios " className="hover:underline">
               Remedios
             </Link>
-            <Link to="/" className="hover:underline">
+            <Link to="" onClick={logout} className="hover:underline">
               Sair
             </Link>
           </div>
