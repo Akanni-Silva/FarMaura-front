@@ -11,6 +11,7 @@ import ListarPeriodos from "./components/periodos/listarPeriodos/ListarPeriodos"
 import FormPeriodo from "./components/periodos/formPeriodo/FormPeriodo";
 import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo";
 import FormRmedio from "./components/remedio/formRemedio/FormRmedio";
+import DeletarRemedio from "./components/remedio/deletarRemedio/DeletarRemedio";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
               <Route path="/editarperiodo/:id" element={<FormPeriodo />} />
               <Route path="/deletarperiodo/:id" element={<DeletarPeriodo />} />
               <Route path="/cadastrarremedio" element={<FormRmedio />} />
+              <Route path="/editarremedio/:id" element={<FormRmedio />} />
+              <Route path="/deletarremedio/:id" element={<DeletarRemedio />} />
             </Routes>
           </div>
           <Footer />
