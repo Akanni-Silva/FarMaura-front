@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ListarPeriodos from "./components/periodos/listarPeriodos/ListarPeriodos";
 import FormPeriodo from "./components/periodos/formPeriodo/FormPeriodo";
 import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo";
+import FormRmedio from "./components/remedio/formRemedio/FormRmedio";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/cadastrarperiodo" element={<FormPeriodo />} />
               <Route path="/editarperiodo/:id" element={<FormPeriodo />} />
               <Route path="/deletarperiodo/:id" element={<DeletarPeriodo />} />
+              <Route path="/cadastrarremedio" element={<FormRmedio />} />
             </Routes>
           </div>
           <Footer />

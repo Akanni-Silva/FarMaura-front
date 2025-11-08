@@ -31,9 +31,6 @@ function Navbar() {
             <Link to="/agenda" className="hover:underline">
               Agenda
             </Link>
-            <Link to="/remedios " className="hover:underline">
-              Remedios
-            </Link>
             <Link to="/periodos " className="hover:underline">
               Periodos
             </Link>
