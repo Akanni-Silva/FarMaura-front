@@ -7,6 +7,9 @@ import Agenda from "./pages/agenda/Agenda";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import ListarPeriodos from "./components/periodos/listarPeriodos/ListarPeriodos";
+import FormPeriodo from "./components/periodos/formPeriodo/FormPeriodo";
+import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo";
 
 function App() {
   return (
@@ -14,12 +17,16 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh] bg-gray-200">
+          <div className="min-h-[80vh]">
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Home />} />
               <Route path="/agenda" element={<Agenda />} />
               <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/periodos" element={<ListarPeriodos />} />
+              <Route path="/cadastrarperiodo" element={<FormPeriodo />} />
+              <Route path="/editarperiodo/:id" element={<FormPeriodo />} />
+              <Route path="/deletarperiodo/:id" element={<DeletarPeriodo />} />
             </Routes>
           </div>
           <Footer />
