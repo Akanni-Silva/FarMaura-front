@@ -17,11 +17,11 @@ function Agenda() {
   const token = usuario.token;
 
   useEffect(() => {
-      if (token === "") {
-        alert("Você precisa estar logado!",);
-        navigate("/");
-      }
-    }, [token]);
+    if (token === "") {
+      alert("Você precisa estar logado!");
+      navigate("/");
+    }
+  }, [token]);
 
   useEffect(() => {
     buscarRemedios();
@@ -54,19 +54,24 @@ function Agenda() {
           <p className="ml-2 ">Agendar novo remedio</p>
           <p className="ml-2 ">Agendar novo remedio</p>
         </div>
-        
+
         <div className="bg-emerald-500 min-w-[80vw] overflow-hidden">
           <div className="container w-1/3 mx-auto">
-          
             <h1 className="text-4xl text-center my-4">Dia</h1>
             <p className="text-center font-semibold mb-4">
               Voce tem os seguintes remedios hoje
             </p>
-            <div
-              className="container mx-auto my-4 
-                        grid grid-cols-1 md:grid-cols-2 
-                        lg:grid-cols-3 gap-4"
-            >
+            <div className="container flex flex-col-reverse overflow-y-scroll thin-scroll min-w-xl">
+              {isLoading && (
+                <div className="flex justify-center items-center h-full">
+                  <SyncLoader color="#D97652" size={24} />
+                </div>
+              )}
+              {!isLoading && remedios.length === 0 && (
+                <span className="text-3xl text-center my-8">
+                  Nenhuma corrida foi encontrada
+                </span>
+              )}
               {remedios.map((remedio) => (
                 <CardRemedio key={remedio.id} remedio={remedio} />
               ))}
