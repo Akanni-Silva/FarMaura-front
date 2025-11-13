@@ -1,20 +1,29 @@
-import React, { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import type Periodo from '../../../models/Periodo';
-import type Remedio from '../../../models/Remedio';
-import { AuthContex } from '../../../contexts/AuthContext';
-import { atualizar, buscar, cadastrar } from '../../../services/Service';
-import { ClipLoader } from 'react-spinners';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import type Periodo from "../../../models/Periodo";
+import type Remedio from "../../../models/Remedio";
+import { AuthContex } from "../../../contexts/AuthContext";
+import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { ClipLoader } from "react-spinners";
 
 function FormRmedio() {
- const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [periodos, setPeriodos] = useState<Periodo[]>([]);
   const [periodo, setPeriodo] = useState<Periodo>({} as Periodo);
 
-  const [remedio, setRemedio] = useState<Remedio>({} as Remedio);
+  const [remedio, setRemedio] = useState<Remedio>({
+    id: 0,
+    nome: "",
+  });
 
   const { usuario, handleLogout } = useContext(AuthContex);
   const token = usuario.token;
@@ -59,10 +68,10 @@ function FormRmedio() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado",);
+      alert("Você precisa estar logado");
       navigate("/");
     }
-  },[token]);
+  }, [token]);
 
   useEffect(() => {
     buscarPeriodos();
@@ -85,14 +94,12 @@ function FormRmedio() {
   }
 
   function retornar() {
-    navigate("/agenda");
+    navigate("/remedios");
   }
 
   async function gerarNovoRemedio(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
-
-
 
     if (id !== undefined) {
       try {
@@ -113,7 +120,7 @@ function FormRmedio() {
         await cadastrar(`/remedios`, remedio, setRemedio, {
           headers: { Authorization: token },
         });
-        alert("O Rmedios foi cadastrado com sucesso!",);
+        alert("O Rmedios foi cadastrado com sucesso!");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
@@ -149,9 +156,10 @@ function FormRmedio() {
         <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Dosagem do remedio</label>
           <input
+            step="0.01"
             type="number"
-            step='0.01' 
-            min ='0'
+            min="0"
+            inputMode="decimal"
             placeholder="mg"
             name="doseMg"
             required
@@ -194,4 +202,4 @@ function FormRmedio() {
   );
 }
 
-export default FormRmedio
+export default FormRmedio;

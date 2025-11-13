@@ -28,8 +28,8 @@ function Navbar() {
                 alt="nome"
               />
             </Link>
-            <Link to="/agenda" className="hover:underline">
-              Agenda
+            <Link to="/remedios" className="hover:underline">
+              Remedios
             </Link>
             <Link to="/periodos " className="hover:underline">
               Periodos

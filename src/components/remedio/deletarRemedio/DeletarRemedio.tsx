@@ -65,7 +65,7 @@ function DeletarRemedio() {
   }
 
   function retornar() {
-    navigate("/agenda");
+    navigate("/remedios");
   }
 
   return (

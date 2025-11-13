@@ -3,7 +3,7 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 
 import Home from "./pages/home/Home";
-import Agenda from "./pages/agenda/Agenda";
+
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -12,6 +12,7 @@ import FormPeriodo from "./components/periodos/formPeriodo/FormPeriodo";
 import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo";
 import FormRmedio from "./components/remedio/formRemedio/FormRmedio";
 import DeletarRemedio from "./components/remedio/deletarRemedio/DeletarRemedio";
+import ListarRemedios from "./components/remedio/listarRemedios/ListarRemedios";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/agenda" element={<Agenda />} />
+              <Route path="/remedios" element={<ListarRemedios />} />
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path="/periodos" element={<ListarPeriodos />} />
               <Route path="/cadastrarperiodo" element={<FormPeriodo />} />
