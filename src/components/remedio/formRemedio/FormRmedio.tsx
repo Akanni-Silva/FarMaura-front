@@ -5,7 +5,7 @@ import React, {
   type ChangeEvent,
   type FormEvent,
 } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import type Periodo from "../../../models/Periodo";
 import type Remedio from "../../../models/Remedio";
 import { AuthContex } from "../../../contexts/AuthContext";
@@ -186,17 +186,28 @@ function FormRmedio() {
             ))}
           </select>
         </div>
-        <button
-          type="submit"
-          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
-          disabled={carregandoPeriodo}
-        >
-          {isLoading ? (
-            <ClipLoader color="#ffffff" size={24} />
-          ) : (
-            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
+
+        <div className="flex">
+          <button
+            type="submit"
+            className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
+            disabled={carregandoPeriodo}
+          >
+            {isLoading ? (
+              <ClipLoader color="#ffffff" size={24} />
+            ) : (
+              <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
+            )}
+          </button>
+          {id !== undefined && (
+            <Link
+              to={`/deletarremedio/${remedio.id}`}
+              className="rounded  bg-red-400 hover:bg-red-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
+            >
+              <button>Deletar</button>
+            </Link>
           )}
-        </button>
+        </div>
       </form>
     </div>
   );

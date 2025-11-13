@@ -1,6 +1,8 @@
+
 import type Remedio from "../../../models/Remedio";
 
 import { Link } from "react-router-dom";
+import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface CardRemedioProps {
   remedio: Remedio;
@@ -8,38 +10,23 @@ interface CardRemedioProps {
 
 function CardRemedio({ remedio }: CardRemedioProps) {
   return (
-    <div className="border-slate-900 border flex flex-col rounded overflow-hidden justify-between">
-      <div>
-        <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
-          <img
-            src={remedio.usuario?.foto || "https://i.imgur.com/pK6vSCy.png"}
-            className="h-12 rounded-full"
-            alt={remedio.usuario?.nome}
+    <div className="flex flex-col overflow-hidden justify-between lg:items-center space-x-2 transition-transform duration-300 hover:scale-105 hover:translate-x">
+      <Link to={`/editarremedio/${remedio.id}`}>
+        <div className="flex h-full w-full bg-white py-3 px-4 items-center gap-4 rounded-3xl ">
+          <CheckIcon
+            size={45}
+            weight="bold"
+            color="white"
+            className="bg-linear-to-r from-green-400 via-green-500 to-sky-500 rounded-full p-3"
           />
-          <h3 className="text-lg font-bold text-center uppercase">
-            {remedio.usuario?.nome}
-          </h3>
+          <div>
+            <h4 className="text-lg font-semibold capitalize">
+              {remedio.nome} {remedio.doseMg} mg
+            </h4>
+            <p>Qtd. comprimidos, {remedio.periodo?.nome}</p>
+          </div>
         </div>
-        <div className="p-4">
-          <h4 className="text-lg font-semibold uppercase">{remedio.nome}</h4>
-          <p>Dose: {remedio.doseMg}</p>
-          <p>{remedio.periodo?.nome}</p>
-        </div>
-      </div>
-      <div className="flex">
-        <Link
-          to={`/editarremedio/${remedio.id}`}
-          className="w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2"
-        >
-          <button>Editar</button>
-        </Link>
-        <Link
-          to={`/deletarremedio/${remedio.id}`}
-          className="text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center"
-        >
-          <button>Deletar</button>
-        </Link>
-      </div>
+      </Link>
     </div>
   );
 }

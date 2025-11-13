@@ -5,6 +5,7 @@ import type Periodo from '../../../models/Periodo';
 import { AuthContex } from '../../../contexts/AuthContext';
 import { buscar } from '../../../services/Service';
 import CardPeriodo from '../cardPeriodo/CardPeriodo';
+import { PlusIcon } from '@phosphor-icons/react';
 
 function ListarPeriodos() {
 
@@ -46,12 +47,22 @@ function ListarPeriodos() {
 
   return (
     <>
-      {isLoading && (
-        <div className="flex justify-center my-8">
-          {" "}
-          <SyncLoader color="#312e81" size={32} />
-        </div>
-      )}
+      {isLoading ? (
+              <div className="flex justify-center w-full my-8">
+                <SyncLoader color="#312e81" size={32} />
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => navigate("/cadastrarperiodo")}
+                  className="bg-linear-to-r from-green-500 to-sky-500 text-white font-extrabold 
+                    p-3 rounded-xl 
+                    shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out text-sm sm:text-base cursor-pointer "
+                >
+                  <PlusIcon color="#ffff" size={32} weight="bold" />
+                </button>
+              </div>
+            )}
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col">
           {!isLoading && periodos.length === 0 && (
@@ -59,7 +70,7 @@ function ListarPeriodos() {
               Nenhum Periodo foi encontrado!
             </span>
           )}
-          <Link to="/cadastrarperiodo"> <button className='bg-amber-300'>+</button></Link>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {periodos.map((periodo) => (
               <CardPeriodo key={periodo.id} periodo={periodo} />

@@ -3,25 +3,41 @@ import ListarRemedios from "../../components/remedio/listarRemedios/ListarRemedi
 function Home() {
   return (
     <>
-      <div className="bg-indigo-900 flex justify-center">
-        <div className="container grid grid-cols-2 text-white">
-          <div className="flex flex-col gap-4 items-center justify-center py-4">
-            <h2 className="text-5xl font-bold">Seja Bem Vinde!</h2>
-            <p className="text-xl">Expresse aqui seus pensamentos e opiniões</p>
+      <div className="bg-gray-50 flex justify-center min-h-screen relative">
+        <div className=" p-4 flex flex-col gap-6">
+          {/* CARD DE DESTAQUE */}
+          <div
+            className="bg-linear-to-r from-green-500 to-sky-500 
+                          text-white rounded-b-3xl shadow-xl p-6 -mt-6"
+          >
+            <p className="text-lg font-semibold opacity-90 tracking-wide">
+              PRÓXIMA DOSE:
+            </p>
 
-            <div className="flex justify-around gap-4"></div>
+            <h2 className="text-4xl font-extrabold leading-tight drop-shadow">
+              Novalgina 500mg
+            </h2>
+
+            <p className="text-base mt-1 mb-6 opacity-90">
+              1 Comprimido às 10:00h
+            </p>
+
+            <button
+              className="w-full bg-linear-to-r from-green-400 to-sky-400
+                        text-white text-2xl font-extrabold py-4
+                        rounded-full shadow-xl hover:scale-105
+                        transition-all duration-300"
+            >
+              TOMEI!
+            </button>
           </div>
 
-          <div className="flex justify-center">
-            <img
-              src="https://i.postimg.cc/fRLyHWBP/Gemini-Generated-Image-y17bb8y17bb8y17b.png"
-              alt="Imagem Página Home"
-              className="w-2/3"
-            />
-          </div>
+          {/* SEU DIA */}
+          <h3 className="text-2xl font-bold text-gray-700 -mb-9">Seu Dia</h3>
+
+          <ListarRemedios />
         </div>
       </div>
-      <ListarRemedios />
     </>
   );
 }

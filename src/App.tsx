@@ -20,7 +20,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh]">
+          <div className="h-[80vh] overflow-auto bg-gray-300">
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Home />} />
