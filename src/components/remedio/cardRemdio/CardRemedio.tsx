@@ -10,9 +10,9 @@ interface CardRemedioProps {
 
 function CardRemedio({ remedio }: CardRemedioProps) {
   return (
-    <div className="flex flex-col overflow-hidden justify-between lg:items-center space-x-2 transition-transform duration-300 hover:scale-105 hover:translate-x">
+    <div className="flex flex-col overflow-hidden justify-between lg:items-center space-x-2 transition-transform duration-300 hover:scale-105 hover:translate-x hover:duration-500 shadow-2xl rounded-3xl  bg-white">
       <Link to={`/editarremedio/${remedio.id}`}>
-        <div className="flex h-full w-full bg-white py-3 px-4 items-center gap-4 rounded-3xl ">
+        <div className="flex h-full  py-3  items-center gap-4  ">
           <CheckIcon
             size={45}
             weight="bold"
