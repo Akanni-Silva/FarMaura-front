@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
+import { ArrowLeftIcon } from "@phosphor-icons/react";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,35 +14,45 @@ function Navbar() {
     navigate("/");
   }
 
-  return (
-    <>
-      <div className="w-full flex justify-center py-4 bg-blue-600 text-white">
+  let component: ReactNode;
+
+  if (usuario.token !== "") {
+    component = (
+      <div
+        className="w-full flex justify-center py-4 bg-linear-to-r from-green-500 to-sky-500  text-white "
+      >
+        <div className="container flex justify-between text-lg mx-8">
+          <span className="font-bold text-2xl flex items-center gap-3">
+            <Link to="" onClick={logout}>
+              <ArrowLeftIcon size={30} weight="bold" />
+            </Link>
+            Olá, {usuario.nome}!
+          </span>
+        </div>
+      </div>
+    );
+  } else {
+    component = (
+      <div
+        className="w-full flex justify-center py-4 bg-linear-to-r from-green-500 to-sky-500 text-white"
+      >
         <div className="container flex justify-between text-lg mx-8">
           <Link to="/" className="text-2xl font-bold hover:underline">
             Farmaura
           </Link>
           <div className="flex gap-4 items-center">
-            <Link to="/perfil" className="hover:underline">
-              <img
-                src="https://i.imgur.com/pK6vSCy.png"
-                className="h-10 rounded-full hover:h-12 duration-500"
-                alt="nome"
-              />
+            <Link to="/" className="hover:underline">
+              Entrar
             </Link>
-            <Link to="/remedios" className="hover:underline">
-              Remedios
-            </Link>
-            <Link to="/periodos " className="hover:underline">
-              Periodos
-            </Link>
-            <Link to="" onClick={logout} className="hover:underline">
-              Sair
+            <Link to="/cadastro " className="hover:underline">
+              Cadastrar
             </Link>
           </div>
         </div>
       </div>
-    </>
-  );
+    );
+  }
+  return <>{component}</>;
 }
 
 export default Navbar;

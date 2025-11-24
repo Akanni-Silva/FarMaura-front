@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from "react-router-dom";
 import CardDestaque from "../../components/remedio/cardDestaque/CardDestaque";
 import ListarRemedios from "../../components/remedio/listarRemedios/ListarRemedios";

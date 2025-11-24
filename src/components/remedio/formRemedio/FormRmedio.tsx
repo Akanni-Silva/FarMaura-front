@@ -12,7 +12,7 @@ import { AuthContex } from "../../../contexts/AuthContext";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
 
-function FormRmedio() {
+function FormRemedio() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -135,17 +135,17 @@ function FormRmedio() {
   const carregandoPeriodo = periodo.nome === "";
 
   return (
-    <div className="container flex flex-col mx-auto items-center p-3 bg-white w-3xl rounded-2xl">
+    <div className="container flex flex-col mx-auto items-center p-3 bg-white  rounded-2xl justify-center w-full min-h-screen">
       <h1 className="text-4xl text-center my-8">
-        {id !== undefined ? "Editar Postagem" : "Cadastrar Postagem"}
+        {id !== undefined ? "Editar Remedio" : "Cadastrar Remedio"}
       </h1>
 
-      <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovoRemedio}>
+      <form className="flex flex-col w-full gap-4 font-bold text-xl" onSubmit={gerarNovoRemedio}>
         <div className="flex flex-col gap-2">
           <label htmlFor="titulo">Nome do Remedio</label>
           <input
             type="text"
-            placeholder="nome"
+            placeholder="Ex: Dipirona"
             name="nome"
             required
             className="border-2 border-slate-700 rounded p-2"
@@ -160,7 +160,7 @@ function FormRmedio() {
             type="number"
             min="0"
             inputMode="decimal"
-            placeholder="mg"
+            placeholder="Ex: 500mg"
             name="doseMg"
             required
             className="border-2 border-slate-700 rounded p-2"
@@ -213,4 +213,4 @@ function FormRmedio() {
   );
 }
 
-export default FormRmedio;
+export default FormRemedio;
