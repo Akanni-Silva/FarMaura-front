@@ -21,7 +21,7 @@ function App() {
         <BrowserRouter>
           <div className=" bg-gray-300">
             <Navbar />
-            <div className="min-h-[80vh] overflow-scroll pb-10">
+            <div className="min-h-[80vh] overflow-auto pb-10">
               <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/home" element={<Home />} />
