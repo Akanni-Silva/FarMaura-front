@@ -59,9 +59,9 @@ function ListarRemedios() {
             {location.pathname === "/remedios" && (
               <button
                 onClick={() => navigate("/cadastrarremedio")}
-                className="absolute right-6 -top-3.5 bg-linear-to-r from-green-500 to-sky-500 text-white p-4 
+                className=" right-6 top-18 bg-linear-to-r from-green-500 to-sky-500 text-white p-4 
                 rounded-full shadow-xl hover:shadow-2xl 
-                hover:scale-105 transition-all duration-300 z-50"
+                hover:scale-105 transition-all duration-300 z-50 fixed"
               >
                 <PlusIcon color="#fff" size={28} weight="bold" />
               </button>

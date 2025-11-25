@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { SyncLoader } from 'react-spinners'
 import type Periodo from '../../../models/Periodo';
 import { AuthContex } from '../../../contexts/AuthContext';
@@ -55,11 +55,11 @@ function ListarPeriodos() {
               <div className="flex justify-center">
                 <button
                   onClick={() => navigate("/cadastrarperiodo")}
-                  className="bg-linear-to-r from-green-500 to-sky-500 text-white font-extrabold 
-                    p-3 rounded-xl 
-                    shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out text-sm sm:text-base cursor-pointer "
+                  className="fixed right-6 top-125 bg-linear-to-r from-green-500 to-sky-500 text-white p-4 
+                rounded-full shadow-xl hover:shadow-2xl 
+                hover:scale-105 transition-all duration-300 z-50"
                 >
-                  <PlusIcon color="#ffff" size={32} weight="bold" />
+                  <PlusIcon color="#ffff" size={28} weight="bold" />
                 </button>
               </div>
             )}
@@ -71,7 +71,11 @@ function ListarPeriodos() {
             </span>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="
+          container mx-auto mb-4 mt-2
+          grid grid-cols-1  
+          lg:grid-cols-3 gap-4
+        ">
             {periodos.map((periodo) => (
               <CardPeriodo key={periodo.id} periodo={periodo} />
             ))}

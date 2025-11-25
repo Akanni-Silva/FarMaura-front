@@ -12,7 +12,7 @@ import FormPeriodo from "./components/periodos/formPeriodo/FormPeriodo";
 import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo";
 import DeletarRemedio from "./components/remedio/deletarRemedio/DeletarRemedio";
 import ListarRemedios from "./components/remedio/listarRemedios/ListarRemedios";
-import FormRemedio from "./components/remedio/formRemedio/FormRmedio";
+import FormRemedio from "./components/remedio/formRemedio/FormRemedio";
 
 function App() {
   return (
