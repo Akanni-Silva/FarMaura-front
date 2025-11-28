@@ -78,8 +78,8 @@ FarMaura-front/
 │   │   │   └── listarPeriodos/
 │   │   │       └── ListarPeriodos.tsx   # Listagem de períodos
 │   │   └── remedio/                     # Componentes de medicamentos
-│   │       ├── cardDestaque/
-│   │       │   └── CardDestaque.tsx     # Card do remédio em destaque (próxima dose)
+│   │       ├── cardStatus/
+│   │       │   └── CardStatus.tsx     # Card do remédio com Status (Atrasado,Pendente,Tomou)
 │   │       ├── cardRemdio/
 │   │       │   └── CardRemedio.tsx      # Card de um remédio individual
 │   │       ├── deletarRemedio/
@@ -280,6 +280,7 @@ Serve os arquivos compilados em `dist/` para teste local.
                │
 ┌──────────────▼──────────────────────┐
 │   Backend API (Render)              │
+│ https://farmaura.onrender.com       │
 └─────────────────────────────────────┘
 ```
 
