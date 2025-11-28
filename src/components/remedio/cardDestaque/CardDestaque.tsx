@@ -8,7 +8,7 @@ function CardDestaque({ remedio }: CardDestaqueProps) {
   return (
     <div
       className="bg-linear-to-r from-green-500 to-sky-500 
-                          text-white rounded-3xl shadow-xl p-6 -mt-6 container w-2xl "
+                          text-white rounded-3xl shadow-xl p-6 -mt-6 container "
     >
       <p className="text-lg font-semibold opacity-90 tracking-wide">
         PRÓXIMA DOSE:
