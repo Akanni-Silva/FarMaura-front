@@ -6,12 +6,10 @@ import {
   LinkedinLogoIcon,
 } from "@phosphor-icons/react";
 import { useContext, type ReactNode } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 
 function Footer() {
-  const navigate = useNavigate();
-
   const { usuario } = useContext(AuthContex);
 
   const location = useLocation();
