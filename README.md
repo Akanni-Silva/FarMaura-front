@@ -28,7 +28,6 @@ Um aplicativo web moderno para gerenciamento de medicamentos e horários de dose
 - ✅ Visualizar o medicamento com dose mais próxima do horário atual em destaque
 - ✅ Gerenciar cronograma de medicamentos de forma intuitiva
 
-A aplicação conecta-se a uma API backend hospedada em **https://farmaura.onrender.com**.
 
 ---
 
