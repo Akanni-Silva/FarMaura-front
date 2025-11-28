@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from "react-router-dom";
 import CardDestaque from "../../components/remedio/cardDestaque/CardDestaque";
-import ListarRemedios from "../../components/remedio/listarRemedios/ListarRemedios";
 import { useContext, useEffect, useState } from "react";
 import type Remedio from "../../models/Remedio";
 import { AuthContex } from "../../contexts/AuthContext";
 import { buscar } from "../../services/Service";
+import Historico from "../historico/Historico";
 
 function Home() {
   const navigate = useNavigate();
@@ -17,8 +17,6 @@ function Home() {
   const { usuario, handleLogout } = useContext(AuthContex);
   const token = usuario.token;
 
-  const remedioDestaque = getRemedioMaisProximo(remedios);
-
   useEffect(() => {
     if (token === "") {
       alert("Você precisa estar logado!");
@@ -28,7 +26,7 @@ function Home() {
 
   useEffect(() => {
     buscarRemedios();
-  }, [remedios.length]);
+  }, []);
 
   async function buscarRemedios() {
     try {
@@ -46,6 +44,14 @@ function Home() {
     }
   }
 
+  /** 🟢 MARCAR COMO TOMADO (somente no front-end) */
+  function tomei(remedio: Remedio) {
+    setRemedios((prev) =>
+      prev.map((r) => (r.id === remedio.id ? { ...r, foiTomadoHoje: true } : r))
+    );
+  }
+
+  /** 🟢 Pegar próximo remédio */
   function getRemedioMaisProximo(lista: Remedio[]): Remedio | null {
     if (!lista || lista.length === 0) return null;
 
@@ -61,11 +67,10 @@ function Home() {
       const [h, m] = r.periodo.horario.split(":").map(Number);
       const minutosRemedio = h * 60 + m;
 
-      // diferença considerando o próximo horário possível
       let diff = minutosRemedio - minutosAgora;
 
-      // se já passou, considera amanhã
-      if (diff < 0) diff += 1440; // 24h
+      // já passou → considera como amanhã
+      if (diff < 0) diff += 1440;
 
       if (diff < menorDiferenca) {
         menorDiferenca = diff;
@@ -76,23 +81,25 @@ function Home() {
     return maisProximo;
   }
 
+  const remedioDestaque = getRemedioMaisProximo(remedios);
+
   return (
     <>
       <div className="bg-gray-50 flex justify-center min-h-screen relative">
-        <div className=" p-4 flex flex-col gap-6">
-          {/* Card Destaque */}
+        <div className="p-4 flex flex-col gap-6">
           {!isLoading && !remedioDestaque && (
             <span className="text-3xl text-center my-8">
-              Nenhum Remedio foi encontrado!
+              Nenhum Remédio foi encontrado!
             </span>
           )}
 
           {!isLoading && remedioDestaque && (
-            <CardDestaque remedio={remedioDestaque} />
+            <CardDestaque remedio={remedioDestaque} tomei={tomei} />
           )}
-          {/* SEU DIA */}
-          <h3 className="text-2xl font-bold text-gray-700 -mb-9">Seu Dia</h3>
-          <ListarRemedios />
+
+          <h3 className="text-2xl font-bold text-gray-700 -mb-6">Seu Dia</h3>
+
+          <Historico />
         </div>
       </div>
     </>

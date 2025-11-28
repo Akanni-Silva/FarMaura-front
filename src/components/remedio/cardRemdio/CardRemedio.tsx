@@ -14,10 +14,10 @@ function CardRemedio({ remedio }: CardRemedioProps) {
       <Link to={`/editarremedio/${remedio.id}`}>
         <div className="flex h-full  py-3  items-center gap-4 ">
           <CheckIcon
-            size={45}
+            size={50}
             weight="bold"
             color="white"
-            className="bg-linear-to-r from-green-400 via-green-500 to-sky-500 rounded-full p-2"
+            className="bg-linear-to-r from-green-400 via-green-500 to-sky-500 rounded-full p-2 w-16"
           />
           <div className="container flex justify-between items-center">
             <h4 className="text-lg font-semibold capitalize">

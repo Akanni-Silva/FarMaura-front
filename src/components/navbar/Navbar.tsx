@@ -28,7 +28,7 @@ function Navbar() {
             </Link>
             Olá, {usuario.nome}!
           </span> 
-          <Link to='/periodos'>
+          <Link to='/historico'>
           <CalendarBlankIcon size={35} weight="bold" />
           </Link>
           

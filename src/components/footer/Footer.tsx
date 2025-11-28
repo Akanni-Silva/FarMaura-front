@@ -46,11 +46,11 @@ function Footer() {
           </Link>
 
           <Link
-            to="/historico"
-            className={`flex flex-col items-center ${isActive("/historico")}`}
+            to="/periodos"
+            className={`flex flex-col items-center ${isActive("/periodos")}`}
           >
             <BankIcon size={28} weight="bold" />
-            <span className="text-sm">Histórico</span>
+            <span className="text-sm">Periodos</span>
           </Link>
 
           <Link

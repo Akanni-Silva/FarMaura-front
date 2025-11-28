@@ -74,7 +74,7 @@ function ListarRemedios() {
           <div className="container flex flex-col mx-2">
             {!isLoading && remedios.length === 0 && (
               <span className="text-3xl text-center my-8">
-                Nenhuma Remedio foi encontrado!
+                Nenhum Remedio foi encontrado!
               </span>
             )}
 
