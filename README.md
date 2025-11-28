@@ -280,7 +280,6 @@ Serve os arquivos compilados em `dist/` para teste local.
                │
 ┌──────────────▼──────────────────────┐
 │   Backend API (Render)              │
-│ https://farmaura.onrender.com       │
 └─────────────────────────────────────┘
 ```
 
