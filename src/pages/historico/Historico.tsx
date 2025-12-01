@@ -1,23 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 import type Remedio from "../../models/Remedio";
 import CardStatus from "../../components/remedio/cardStatus/CardStatus";
+import { buscar } from "../../services/Service";
 import { SyncLoader } from "react-spinners";
 
-function Historico({clicou}: any) {
+function Historico({ clicou }: any) {
   const navigate = useNavigate();
 
   const [isLoading] = useState<boolean>(false);
 
   // const [remedios, setRemedios] = useState<Remedio[]>([]);
 
-  const { usuario, getRemedios, remedios } = useContext(AuthContex);
+  const { usuario, remedios, getRemedios } = useContext(AuthContex);
   const token = usuario.token;
-
-
 
   function calcularStatus(remedio: Remedio, horarioAtual: Date): string {
     if (remedio.foiTomadoHoje) {
@@ -43,13 +40,9 @@ function Historico({clicou}: any) {
     if (token === "") {
       alert("Você precisa estar logado!");
       navigate("/");
-    }
+    } getRemedios()
   }, [token]);
 
-  useEffect(() => {
-      getRemedios();
-    }, []);
-  
 
   return (
     <>
@@ -71,7 +64,9 @@ function Historico({clicou}: any) {
                   lg:grid-cols-3 gap-4
                 "
         >
-          {remedios.map((remedio) => {
+          {remedios
+            .filter(remedio => remedio.periodo && remedio.periodo.horario) // Filtro para evitar erros
+            .map((remedio) => {
             const status = calcularStatus(remedio, new Date()); // <-- Agora envia horário atual
 
             return (

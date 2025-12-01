@@ -20,7 +20,7 @@ function App() {
     <>
       <AuthProvider>
         <BrowserRouter>
-          <div className=" bg-gray-300">
+          <div className="bg-gray-50">
             <Navbar />
             <div className="min-h-[80vh] overflow-auto pb-10">
               <Routes>

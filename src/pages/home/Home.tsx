@@ -64,7 +64,7 @@ function Home() {
 
   return (
     <>
-      <div className="bg-gray-50 flex justify-center min-h-screen relative">
+      <div className=" flex justify-center min-h-screen relative">
         <div className="p-4 flex flex-col gap-6">
           {!isLoading && !remedioDestaque && (
             <div
