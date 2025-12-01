@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 import type Remedio from "../../models/Remedio";
 import CardStatus from "../../components/remedio/cardStatus/CardStatus";
-import { buscar } from "../../services/Service";
 import { SyncLoader } from "react-spinners";
 
-function Historico() {
+function Historico({clicou}: any) {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading] = useState<boolean>(false);
 
-  const [remedios, setRemedios] = useState<Remedio[]>([]);
+  // const [remedios, setRemedios] = useState<Remedio[]>([]);
 
-  const { usuario, handleLogout } = useContext(AuthContex);
+  const { usuario, getRemedios, remedios } = useContext(AuthContex);
   const token = usuario.token;
+
+
 
   function calcularStatus(remedio: Remedio, horarioAtual: Date): string {
     if (remedio.foiTomadoHoje) {
@@ -44,24 +45,9 @@ function Historico() {
   }, [token]);
 
   useEffect(() => {
-    buscarRemedios();
-  }, [remedios.length]);
-
-  async function buscarRemedios() {
-    try {
-      setIsLoading(true);
-
-      await buscar("/remedios", setRemedios, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
+      getRemedios();
+    }, []);
+  
 
   return (
     <>
