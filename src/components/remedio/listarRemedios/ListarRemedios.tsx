@@ -1,20 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import CardRemedio from "../cardRemdio/CardRemedio";
-import type Remedio from "../../../models/Remedio";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../../contexts/AuthContext";
-import { buscar } from "../../../services/Service";
 import { SyncLoader } from "react-spinners";
 import { PlusIcon } from "@phosphor-icons/react";
 
 function ListarRemedios() {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading] = useState<boolean>(false);
 
-  const [remedios, setRemedios] = useState<Remedio[]>([]);
-
-  const { usuario, handleLogout } = useContext(AuthContex);
+  const { usuario, getRemedios, remedios } = useContext(AuthContex);
   const token = usuario.token;
 
   useEffect(() => {
@@ -22,27 +18,8 @@ function ListarRemedios() {
       alert("Você precisa estar logado!");
       navigate("/");
     }
+    getRemedios();
   }, [token]);
-
-  useEffect(() => {
-    buscarRemedios();
-  }, [remedios.length]);
-
-  async function buscarRemedios() {
-    try {
-      setIsLoading(true);
-
-      await buscar("/remedios", setRemedios, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   const location = useLocation();
 
@@ -78,13 +55,16 @@ function ListarRemedios() {
               </span>
             )}
 
+            {location.pathname === "/remedios" &&(<h3 className="text-xl font-bold text-center py-3">Remedios</h3>)}
+
             <div
               className="
-          container mx-auto mb-4 mt-2
+          container mx-auto mb-4 mt-2 px-8
           grid grid-cols-1  
           lg:grid-cols-3 gap-4
         "
             >
+
               {remedios.map((remedio) => (
                 <CardRemedio key={remedio.id} remedio={remedio} />
               ))}

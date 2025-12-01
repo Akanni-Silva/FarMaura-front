@@ -1,16 +1,22 @@
 /* eslint-disable prefer-const */
 import {
   BankIcon,
+  CalendarCheckIcon,
+  DeskIcon,
   GithubLogoIcon,
+  HouseIcon,
   InstagramLogoIcon,
   LinkedinLogoIcon,
+  PillIcon,
+  SignOutIcon,
 } from "@phosphor-icons/react";
 import { useContext, type ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 
 function Footer() {
-  const { usuario } = useContext(AuthContex);
+  const navigate = useNavigate();
+  const { usuario, handleLogout } = useContext(AuthContex);
 
   const location = useLocation();
 
@@ -20,6 +26,12 @@ function Footer() {
       : "text-gray-500"; // inativo
 
   let data = new Date().getFullYear();
+
+  function logout() {
+    handleLogout();
+    alert("O Usuário foi desconectado com sucesso!");
+    navigate("/");
+  }
 
   let component: ReactNode;
 
@@ -31,7 +43,7 @@ function Footer() {
             to="/home"
             className={`flex flex-col items-center ${isActive("/home")}`}
           >
-            <BankIcon size={28} weight="bold" />
+            <HouseIcon size={28} weight="bold" />
             <span className="text-sm">Início</span>
           </Link>
 
@@ -39,7 +51,7 @@ function Footer() {
             to="/remedios"
             className={`flex flex-col items-center ${isActive("/remedios")}`}
           >
-            <BankIcon size={28} weight="bold" />
+            <PillIcon size={28} weight="bold" />
             <span className="text-sm">Meus Remédios</span>
           </Link>
 
@@ -47,16 +59,17 @@ function Footer() {
             to="/periodos"
             className={`flex flex-col items-center ${isActive("/periodos")}`}
           >
-            <BankIcon size={28} weight="bold" />
+            <CalendarCheckIcon size={28} weight="bold" />
             <span className="text-sm">Periodos</span>
           </Link>
 
           <Link
-            to="/cuidador"
-            className={`flex flex-col items-center ${isActive("/cuidador")}`}
+            to=""
+            onClick={logout}
+            className={`flex flex-col items-center text-red-500`}
           >
-            <BankIcon size={28} weight="bold" />
-            <span className="text-sm">Cuidador</span>
+            <SignOutIcon size={28} weight="bold" />
+            <span className="text-sm">Sair</span>
           </Link>
         </div>
       </div>

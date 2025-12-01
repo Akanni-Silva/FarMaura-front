@@ -6,12 +6,10 @@ import { ArrowLeftIcon, CalendarBlankIcon } from "@phosphor-icons/react";
 function Navbar() {
   const navigate = useNavigate();
 
-  const { usuario, handleLogout } = useContext(AuthContex);
+  const { usuario, } = useContext(AuthContex);
 
-  function logout() {
-    handleLogout();
-    alert("O Usuário foi desconectado com sucesso!");
-    navigate("/");
+  function retornar() {
+    navigate(-1);
   }
 
   let component: ReactNode;
@@ -23,7 +21,7 @@ function Navbar() {
       >
         <div className="container flex justify-between text-lg mx-8">
           <span className="font-bold text-2xl flex items-center gap-3">
-            <Link to="" onClick={logout}>
+            <Link to="" onClick={retornar}>
               <ArrowLeftIcon size={30} weight="bold" />
             </Link>
             Olá, {usuario.nome}!

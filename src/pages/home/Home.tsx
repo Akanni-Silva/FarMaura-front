@@ -76,7 +76,7 @@ function Home() {
               </p>
 
               <h2 className="text-4xl font-extrabold capitalize text-center">
-                Nenhum remedio Pendente
+                Nenhum remedio Pendente Hoje
               </h2>
 
               <p className="text-base mt-2 mb-6 opacity-90"></p>
@@ -85,7 +85,7 @@ function Home() {
                 disabled
                 className="w-full bg-linear-to-r from-green-400 to-sky-400
                 text-white text-2xl font-extrabold py-4 rounded-full shadow-xl 
-                hover:scale-105 transition-all duration-300"
+                "
               >
                 TOMEI!
               </button>

@@ -70,7 +70,7 @@ function ListarPeriodos() {
               Nenhum Periodo foi encontrado!
             </span>
           )}
-          
+          <h3 className="text-xl font-bold text-center py-3">Periodos do Dia</h3>
           <div className="
           container mx-auto mb-4 mt-2
           grid grid-cols-1  

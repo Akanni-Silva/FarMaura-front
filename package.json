@@ -12,7 +12,9 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.1.16",
+    "@types/js-cookie": "^3.0.6",
     "axios": "^1.13.1",
+    "js-cookie": "^3.0.5",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",

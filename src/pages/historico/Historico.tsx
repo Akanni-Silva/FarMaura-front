@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 import type Remedio from "../../models/Remedio";
 import CardStatus from "../../components/remedio/cardStatus/CardStatus";
@@ -15,6 +15,7 @@ function Historico({ clicou }: any) {
 
   const { usuario, remedios, getRemedios } = useContext(AuthContex);
   const token = usuario.token;
+  const location = useLocation()
 
   function calcularStatus(remedio: Remedio, horarioAtual: Date): string {
     if (remedio.foiTomadoHoje) {
@@ -57,13 +58,14 @@ function Historico({ clicou }: any) {
             Nenhum Remédio foi encontrado!
           </span>
         )}
+        {location.pathname === "/historico" &&(<h3 className="text-xl font-bold text-center py-3">Agenda</h3>)}
         <div
           className="
-                  container mx-auto mb-4 mt-2
+                  container mx-auto mb-4 mt-2 px-8
                   grid grid-cols-1  
                   lg:grid-cols-3 gap-4
                 "
-        >
+        > 
           {remedios
             .filter(remedio => remedio.periodo && remedio.periodo.horario) // Filtro para evitar erros
             .map((remedio) => {
