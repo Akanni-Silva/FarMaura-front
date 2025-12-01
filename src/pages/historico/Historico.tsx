@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";

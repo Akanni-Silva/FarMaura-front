@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import type Remedio from "../../models/Remedio";
 import { AuthContex } from "../../contexts/AuthContext";
-import { buscar } from "../../services/Service";
 import Historico from "../historico/Historico";
 
 function Home() {
