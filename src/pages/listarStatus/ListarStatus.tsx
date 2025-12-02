@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../contexts/AuthContext";
 import type Remedio from "../../models/Remedio";
 import CardStatus from "../../components/remedio/cardStatus/CardStatus";
-import { buscar } from "../../services/Service";
 import { SyncLoader } from "react-spinners";
 
-function Historico({ clicou }: any) {
+function ListarStatus({ clicou }: any) {
   const navigate = useNavigate();
 
   const [isLoading] = useState<boolean>(false);
@@ -44,7 +43,6 @@ function Historico({ clicou }: any) {
     } getRemedios()
   }, [token]);
 
-
   return (
     <>
       {isLoading && (
@@ -81,4 +79,4 @@ function Historico({ clicou }: any) {
   );
 }
 
-export default Historico;
+export default ListarStatus;

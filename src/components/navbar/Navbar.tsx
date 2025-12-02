@@ -6,7 +6,7 @@ import { ArrowLeftIcon, CalendarBlankIcon } from "@phosphor-icons/react";
 function Navbar() {
   const navigate = useNavigate();
 
-  const { usuario, } = useContext(AuthContex);
+  const { usuario } = useContext(AuthContex);
 
   function retornar() {
     navigate(-1);

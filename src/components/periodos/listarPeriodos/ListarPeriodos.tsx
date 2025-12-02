@@ -25,25 +25,35 @@ function ListarPeriodos() {
     }
   }, [token]);
 
-  useEffect(() => {
-    buscarPeriodos();
-  }, [periodos.length]);
-
   async function buscarPeriodos() {
     try {
       setIsLoading(true);
-
-      await buscar("/periodos", setPeriodos, {
-        headers: { Authorization: token },
+      const response = await buscar("/periodos", undefined, {
+        headers: {
+          Authorization: token,
+        },
       });
+
+      const userPeriods = response.data.filter((periodo: Periodo) =>
+        periodo.usuario && periodo.usuario.id === usuario.id
+      );
+      setPeriodos(userPeriods);
+
     } catch (error: any) {
       if (error.toString().includes("401")) {
         handleLogout();
       }
+      alert("Erro ao buscar períodos:");
     } finally {
       setIsLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (token !== '') {
+      buscarPeriodos();
+    }
+  }, [token]);
 
   return (
     <>
@@ -65,12 +75,12 @@ function ListarPeriodos() {
             )}
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col">
-          {!isLoading && periodos.length === 0 && (
+          {!isLoading && periodos.length === 0 ? (
             <span className="text-3xl text-center my-8">
               Nenhum Periodo foi encontrado!
             </span>
-          )}
-          <h3 className="text-xl font-bold text-center py-3">Periodos do Dia</h3>
+          ): ( <h3 className="text-xl font-bold text-center py-3">Periodos do Dia</h3>)}
+         
           <div className="
           container mx-auto mb-4 mt-2
           grid grid-cols-1  

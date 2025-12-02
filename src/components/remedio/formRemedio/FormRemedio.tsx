@@ -56,7 +56,12 @@ function FormRemedio() {
 
   async function buscarPeriodos() {
     try {
-      await buscar("/periodos", setPeriodos, {
+      await buscar("/periodos", (periodosDaApi: Periodo[]) => {
+        const periodosDoUsuario = periodosDaApi.filter(
+          (periodo) => periodo.usuario?.id === usuario.id
+        );
+        setPeriodos(periodosDoUsuario);
+      }, {
         headers: { Authorization: token },
       });
     } catch (error: any) {

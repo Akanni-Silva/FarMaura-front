@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 import Cookies from "js-cookie"; // Importando a biblioteca de cookies
 import type UsuarioLogin from "../models/UsuarioLogin";
 import { buscar, login } from "../services/Service";
@@ -24,7 +24,7 @@ export const AuthContex = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const USER_COOKIE = "usuarioAuth";
-  const TAKEN_TODAY_COOKIE = "remediosTomadosHoje";
+  const StatusRemedioDia = "remediosTomadosHoje";
 
   const [usuario, setUsuario] = useState<UsuarioLogin>(() => {
     const cookie = Cookies.get(USER_COOKIE);
@@ -73,23 +73,37 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function getRemedios() {
     try {
       setIsLoading(true);
-      // O callback do `buscar` recebe os remédios da API
       await buscar("/remedios", (remediosDaApi: Remedio[]) => {
-          // Lê o cookie
-          const cookieValue = Cookies.get(TAKEN_TODAY_COOKIE);
-          const takenIds: number[] = cookieValue ? JSON.parse(cookieValue) : [];
-          
-          let remediosParaExibir = remediosDaApi;
+        const hoje = new Date().toISOString().split('T')[0];
+        const cookieValue = Cookies.get(StatusRemedioDia);
+        let takenIds: number[] = [];
 
-          // Se existem IDs no cookie, atualiza a lista vinda da API
-          if (takenIds.length > 0) {
-            remediosParaExibir = remediosDaApi.map(r => ({
-                ...r,
-                foiTomadoHoje: takenIds.includes(r.id)
-            }));
+        if (cookieValue) {
+          try {
+            const parsedData = JSON.parse(cookieValue);
+            // Se o cookie for de hoje, usa a lista de IDs.
+            if (parsedData.date === hoje) {
+              takenIds = parsedData.takenIds;
+            } else {
+              // Se não for de hoje, o cookie é antigo e deve ser removido.
+              Cookies.remove(StatusRemedioDia);
+            }
+          } catch (error) {
+            alert("Erro ao parsear cookie de remédios:");
+            // Se o cookie antigo estiver em formato inválido, remove.
+            Cookies.remove(StatusRemedioDia);
           }
-          // Define o estado com a lista correta (original ou atualizada)
-          setRemedios(remediosParaExibir);
+        }
+
+        // Mapeia os remédios da API, definindo `foiTomadoHoje` com base na lista de IDs.
+        // Se a lista `takenIds` estiver vazia (seja por um novo dia ou por erro no cookie),
+        // `foiTomadoHoje` será `false` para todos.
+        const remediosParaExibir = remediosDaApi.map(r => ({
+          ...r,
+          foiTomadoHoje: takenIds.includes(r.id)
+        }));
+
+        setRemedios(remediosParaExibir);
 
       }, {
         headers: { Authorization: usuario.token },
@@ -108,30 +122,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
       prev.map((r) => (r.id === remedio.id ? { ...r, foiTomadoHoje: true } : r))
     );
 
-    // Salva o ID no cookie
-    const cookieValue = Cookies.get(TAKEN_TODAY_COOKIE);
-    const takenIds: number[] = cookieValue ? JSON.parse(cookieValue) : [];
-    if (!takenIds.includes(remedio.id)) {
-      takenIds.push(remedio.id);
-      // O cookie expira em 1 dia, sincronizado com a lógica de reset
-      Cookies.set(TAKEN_TODAY_COOKIE, JSON.stringify(takenIds), { expires: 1 });
+    const hoje = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    const cookieValue = Cookies.get(StatusRemedioDia);
+    let cookieData = { date: hoje, takenIds: [] as number[] };
+
+    if (cookieValue) {
+        try {
+            const parsedData = JSON.parse(cookieValue);
+            // Se o cookie é de hoje, usa os dados dele. Senão, começa um novo.
+            if (parsedData.date === hoje) {
+                cookieData = parsedData;
+            }
+        } catch (error) {
+            alert("Erro ao parsear cookie de remédios");
+            // Se o cookie antigo estiver em formato inválido, ele será sobrescrito.
+        }
+    }
+
+    if (!cookieData.takenIds.includes(remedio.id)) {
+      cookieData.takenIds.push(remedio.id);
+      // O cookie expira em 1 dia
+      Cookies.set(StatusRemedioDia, JSON.stringify(cookieData), { expires: 1 });
     }
   }
 
-  // ► Zera "tomado" todos os dias às 00:00
-  useEffect(() => {
-    const verificarReset = setInterval(() => {
-      const agora = new Date();
-      if (agora.getHours() === 0 && agora.getMinutes() === 0) {
-        setRemedios((prev) =>
-          prev.map((r) => ({ ...r, foiTomadoHoje: false }))
-        );
-        Cookies.remove(TAKEN_TODAY_COOKIE); // Limpa o cookie à meia-noite
-      }
-    }, 60000); // verifica a cada 1 min
 
-    return () => clearInterval(verificarReset);
-  }, []);
 
   return (
     <AuthContex.Provider

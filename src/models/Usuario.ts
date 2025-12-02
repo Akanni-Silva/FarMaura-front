@@ -7,4 +7,5 @@ export default interface Usuario{
     foto:string;
     senha:string;
     remedios?:Remedio[] | null;
+    
 }

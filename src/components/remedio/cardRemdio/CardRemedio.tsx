@@ -3,14 +3,20 @@ import type Remedio from "../../../models/Remedio";
 import { Link } from "react-router-dom";
 import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { PencilSimpleIcon } from "@phosphor-icons/react";
+import { AuthContex } from "../../../contexts/AuthContext";
+import { useContext, type ReactNode } from "react";
 
 interface CardRemedioProps {
   remedio: Remedio;
 }
 
 function CardRemedio({ remedio }: CardRemedioProps) {
-  return (
-    <div className="flex flex-col overflow-hidden justify-between lg:items-center space-x-2 transition-transform duration-300 hover:scale-105 hover:translate-x hover:duration-500 shadow-2xl rounded-3xl  bg-white px-6">
+  const { usuario } = useContext(AuthContex);
+
+  let component: ReactNode;
+
+  if(usuario.id === remedio.usuario?.id) {
+    component =(<div className="flex flex-col overflow-hidden justify-between lg:items-center space-x-2 transition-transform duration-300 hover:scale-105 hover:translate-x hover:duration-500 shadow-2xl rounded-3xl  bg-white px-6">
       <Link to={`/editarremedio/${remedio.id}`}>
         <div className="flex h-full  py-3  items-center gap-4 ">
           <CheckIcon
@@ -29,7 +35,11 @@ function CardRemedio({ remedio }: CardRemedioProps) {
           </div>
         </div>
       </Link>
-    </div>
+    </div>)
+  }
+
+  return (
+    <>{component}</>
   );
 }
 

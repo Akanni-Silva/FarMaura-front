@@ -26,11 +26,14 @@ export const login = async (
 
 export const buscar = async (
   url: string,
-  setDados: Function,
+  setDados: Function | undefined,
   header: Object
 ) => {
   const resposta = await api.get(url, header);
-  setDados(resposta.data);
+  if (setDados) {
+    setDados(resposta.data);
+  }
+  return resposta;
 };
 
 export const cadastrar = async (

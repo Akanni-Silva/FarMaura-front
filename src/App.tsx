@@ -13,7 +13,8 @@ import DeletarPeriodo from "./components/periodos/deletarPeriodo/DeletarPeriodo"
 import DeletarRemedio from "./components/remedio/deletarRemedio/DeletarRemedio";
 import ListarRemedios from "./components/remedio/listarRemedios/ListarRemedios";
 import FormRemedio from "./components/remedio/formRemedio/FormRemedio";
-import Historico from "./pages/historico/Historico";
+import Historico from "./pages/listarStatus/ListarStatus";
+import ListarStatus from "./pages/listarStatus/ListarStatus";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
                   element={<DeletarPeriodo />}
                 />
                 <Route path="/cadastrarremedio" element={<FormRemedio />} />
-                <Route path="/historico" element={<Historico />} />
+                <Route path="/historico" element={<ListarStatus />} />
                 <Route path="/editarremedio/:id" element={<FormRemedio />} />
                 <Route
                   path="/deletarremedio/:id"

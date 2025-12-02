@@ -6,6 +6,8 @@ import {
   ClockIcon,
   XIcon,
 } from "@phosphor-icons/react";
+import { useContext, type ReactNode } from "react";
+import { AuthContex } from "../../../contexts/AuthContext";
 
 interface CardStatusProps {
   remedio: Remedio;
@@ -34,8 +36,13 @@ function CardStatus({ remedio, status }: CardStatusProps) {
 
   const { bg, text, icon: StatusIcon } = statusConfig[status];
 
-  return (
-    <div className="flex flex-col overflow-hidden justify-between lg:items-center transition-transform duration-300 hover:scale-105 shadow-2xl rounded-3xl bg-white px-6">
+  const { usuario } = useContext(AuthContex);
+
+  
+    let component: ReactNode;
+  
+    if(usuario.id === remedio.usuario?.id){
+      component=(<div className="flex flex-col overflow-hidden justify-between lg:items-center transition-transform duration-300 hover:scale-105 shadow-2xl rounded-3xl bg-white px-6">
       <Link to={`/editarremedio/${remedio.id}`}>
         <div className="flex h-full py-3 items-center gap-4">
           {/* ÍCONE DO STATUS */}
@@ -54,7 +61,12 @@ function CardStatus({ remedio, status }: CardStatusProps) {
           </div>
         </div>
       </Link>
-    </div>
+    </div>)
+    }
+  
+
+  return (
+    <>{component}</>
   );
 }
 

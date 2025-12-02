@@ -52,6 +52,7 @@ function FormPeriodo() {
     setPeriodo({
       ...periodo,
       [e.target.name]: e.target.value,
+      usuario: usuario,
     });
   }
 
