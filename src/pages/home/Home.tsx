@@ -130,7 +130,7 @@ function Home() {
             <>{component}</>
           )}
 
-          <h3 className="text-2xl font-bold text-gray-700 -mb-6">Seu Dia</h3>
+          <h3 className="text-2xl font-bold text-gray-700 -mb-6 text-center">Seu Dia</h3>
 
           <ListarStatus clicou={true} />
         </div>

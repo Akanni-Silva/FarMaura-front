@@ -60,8 +60,7 @@ function ListarStatus({ clicou }: any) {
         <div
           className="
                   container mx-auto mb-4 mt-2 px-8
-                  grid grid-cols-1  
-                  lg:grid-cols-3 gap-4
+                  grid grid-cols-1 gap-4
                 "
         > 
           {remedios
