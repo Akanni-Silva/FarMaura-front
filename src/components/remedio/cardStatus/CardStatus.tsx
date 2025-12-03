@@ -42,9 +42,9 @@ function CardStatus({ remedio, status }: CardStatusProps) {
     let component: ReactNode;
   
     if(usuario.id === remedio.usuario?.id){
-      component=(<div className="flex flex-col overflow-hidden justify-between lg:items-center transition-transform duration-300 hover:scale-105 shadow-2xl rounded-3xl bg-white px-6">
+      component=(<div className="flex flex-col overflow-hidden justify-between lg:items-center transition-transform duration-300 hover:scale-105 shadow-2xl rounded-3xl bg-white px-6 ">
       <Link to={`/editarremedio/${remedio.id}`}>
-        <div className="flex h-full py-3 items-center gap-4">
+        <div className="flex h-full py-3 items-center gap-4 ">
           {/* ÍCONE DO STATUS */}
           <StatusIcon
             size={50}

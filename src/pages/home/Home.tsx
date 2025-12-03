@@ -86,7 +86,7 @@ function Home() {
               <button
                 className="w-full bg-linear-to-r from-green-400 to-sky-400
                 text-white text-2xl font-extrabold py-4 rounded-full shadow-xl 
-                hover:scale-105 transition-all duration-300"
+                hover:scale-102 transition-all duration-300"
                 onClick={() => tomei(remedioDestaque)} // <-- FIX AQUI
               >
                 TOMEI!
